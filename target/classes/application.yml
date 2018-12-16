@@ -1,0 +1,39 @@
+drill:
+   path: /export/programs/apache-drill-1.14.0
+   
+management:
+   endpoints:
+      web:
+         exposure:
+            include: "*"
+   metrics:
+      enable:
+         root: true
+         jvm: true
+   endpoint:
+      restart:
+         enabled: true
+      shutdown:
+         enabled: true
+spring:
+   datasource:
+      jmx-enabled: false
+   main:
+      allow-bean-definition-overriding: true
+      
+logging:
+   file: /logs/drill-embedded.log   
+   level:
+      root: WARN
+      org.springframework: WARN
+      org.apache.drill: WARN
+      com.clc.drill: INFO
+   pattern:
+        console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+        file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+  
+datasource:
+   locations:
+      json: cp.`employee.json`
+      csv: dfs.`/export/programs/apache-drill-1.14.0/sample-data/free-zipcode-database.csv`
+      parquet: dfs.`/export/programs/apache-drill-1.14.0/sample-data/nationsMF/nationsMF.parquet`
